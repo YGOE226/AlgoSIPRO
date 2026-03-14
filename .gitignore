@@ -1,0 +1,11 @@
+compil
+compil.tab.c
+compil.tab.h
+lex.yy.c
+compil.output
+*.asm
+*.sip
+*.sipro
+*.bin
+gmon.out
+a.out

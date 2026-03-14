@@ -1,0 +1,21 @@
+% Test 3 : Somme des n premiers entiers (boucle while)
+\begin{algo}{somme}{n}
+  \SET{s}{0}
+  \SET{i}{1}
+  \DOWHILE{i<=n}
+    \SET{s}{s+i}
+    \SET{i}{i+1}
+  \OD
+  \RETURN{s}
+\end{algo}
+
+% Test 4 : algo appelant un autre algo
+\begin{algo}{double}{x}
+  \RETURN{x+x}
+\end{algo}
+
+\begin{algo}{quadruple}{x}
+  \RETURN{\CALL{double}{\CALL{double}{x}}}
+\end{algo}
+
+\CALL{somme}{10}

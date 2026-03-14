@@ -1,0 +1,10 @@
+% Test 1 : Fibonacci récursif
+\begin{algo}{fibonacci}{n}
+  \IF{n<=1}
+    \RETURN{n}
+  \FI
+  \SET{a}{\CALL{fibonacci}{n-1}}
+  \SET{b}{\CALL{fibonacci}{n-2}}
+  \RETURN{a+b}
+\end{algo}
+\CALL{fibonacci}{10}

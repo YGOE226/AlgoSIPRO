@@ -1,0 +1,9 @@
+  \begin{algo}{puissancerec}{a,b}
+    \IF{b=0}
+      \RETURN{1}
+    \ELSE
+      \SET{p}{\CALL{puissancerec}{a,b-1}}
+      \RETURN{a*p}
+    \FI 
+  \end{algo}
+  \CALL{puissancerec}{2,3}
