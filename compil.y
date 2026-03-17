@@ -3,30 +3,30 @@
  * compil.y  –– Compilateur ALgo → assembleur SIPRO
  *             Analyseur syntaxique (bison)
  *
- * Auteurs : [votre nom] — Licence 3 Informatique 2024-2025
+ * Auteurs : YAMEOGO Ghislain & LOMPO Pascal — Licence 3 Informatique 2024-2025
  *
- * Convention d'appel SIPRO :
+ * Convention d'appel SIPRO (pile croissante : push = sp += 2) :
  *   Appelant de f(a1,...,aN) :
  *     push a1 ; ... ; push aN
  *     const ax, f ; call ax
- *     const bx, 2*N ; add sp, bx    (nettoyage côté appelant)
- *     résultat dans ax
+ *     const bx, 2*N ; sub sp, bx    (nettoyage cote appelant)
+ *     resultat dans ax
  *
  *   Prologue de f(p1,...,pN) :
  *     push bp
- *     const bp,0 ; add bp,sp        → bp = sp (pointe sur [old_bp])
- *     const ax, FRAME_SIZE ; sub sp,ax
+ *     cp bp, sp                      → bp = sp (pointe sur [old_bp])
+ *     const ax, FRAME_SIZE ; add sp, ax  (reserve les locaux)
  *
- *   Layout pile après prologue :
- *     bp + 2*(N+1) = p1   (premier arg, le plus loin)
- *     bp + 4       = pN   (dernier arg)
- *     bp + 2       = adr_ret
- *     bp + 0       = old_bp  ← bp
- *     bp - 2       = local0
- *     bp - 4       = local1 ...
+ *   Layout pile apres prologue :
+ *     bp - 2*(N+1) = p1   (premier arg, le plus loin)
+ *     bp - 4       = pN   (dernier arg)
+ *     bp - 2       = adr_ret
+ *     bp + 0       = old_bp  <- bp
+ *     bp + 2       = local0
+ *     bp + 4       = local1 ...
  *
- *   Épilogue (:ret_NOM) :
- *     const sp,0 ; add sp,bp ; pop bp ; ret
+ *   Epilogue (:ret_NOM) :
+ *     cp sp, bp ; pop bp ; ret
  */
 
 #define _POSIX_C_SOURCE 200809L
@@ -693,7 +693,7 @@ int main(int argc, char *argv[]) {
     printf("\n");
     printf(":stack\n");
     /* 64 niveaux d'imbrication × (FRAME_SIZE/2 mots locaux + 2 mots pour bp+adr_ret) */
-    int stack_words = 200;  /* 200 mots suffisants pour les tests */
+    int stack_words = 1000;  /* 1000 mots = 2000 cellules, suffisant pour la recursivite */
     for (int i = 0; i < stack_words; i++)
         printf("@int 0\n");
 
