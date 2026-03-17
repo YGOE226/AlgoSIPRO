@@ -470,6 +470,9 @@ final_call
           emit_call($2, $6);
           E("\tconst bx,print_tmp\n");
           E("\tstorew ax,bx\n");
+          E("\tconst ax,msg_result\n");
+          E("\tcallprintfs ax\n");
+          E("\tconst bx,print_tmp\n");
           E("\tcallprintfd bx\n");
           E("\tconst ax,msg_newline\n");
           E("\tcallprintfs ax\n");
@@ -670,6 +673,8 @@ int main(int argc, char *argv[]) {
 
     printf(":msg_newline\n");
     printf("@string \"\\n\"\n\n");
+    printf(":msg_result\n");
+    printf("@string \"Resultat final : \"\n\n");
     printf(":msg_div0\n");
     printf("@string \"Erreur: division par zero\\n\"\n\n");
 

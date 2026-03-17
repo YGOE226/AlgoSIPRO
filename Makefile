@@ -40,8 +40,18 @@ tests: $(TARGET)
 asm: $(TARGET)
 	./$(TARGET) puissance.tex     > puissance.asm
 	./$(TARGET) puissancerec.tex  > puissancerec.asm
+	./$(TARGET) fibonacci.tex     > fibonacci.asm
+	./$(TARGET) factorielle.tex   > factorielle.asm
+	./$(TARGET) somme.tex         > somme.asm
 	@echo "Fichiers ASM generes."
 
+sip: 
+	asipro puissance.asm puissance.sip
+		asipro puissancerec.asm  puissancerec.sip
+	asipro fibonacci.asm     fibonacci.sip
+	asipro factorielle.asm   factorielle.sip
+	asipro somme.asm         somme.sip	
+		@echo "Fichiers SIP generes."
 # -- Execution avec asipro + sipro ------------------------------------------
 run_%: $(TARGET)
 	./$(TARGET) $*.tex > /tmp/$*.asm
